@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <main>
     <TheHeader />
     <TheTable />
-  </div>
+  </main>
 </template>
 
 <script>
