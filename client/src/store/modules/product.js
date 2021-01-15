@@ -6,15 +6,35 @@ export default {
   },
   getters: {
     allProducts (state) {
-      return state.products.map(item => {
-        item.selected = false
-        return item
-      })
+      return state.products
     }
   },
   mutations: {
     insertProducts (state, result) {
-      state.products = result
+      const result2 = result.map(item => {
+        item.selected = false
+        return item
+      })
+
+      state.products = result2
+    },
+
+    updateCheckProduct (state, id) {
+      const result = state.products.map(item => {
+        if (item._id === id) {
+          return { ...item, selected: !item.selected }
+        }
+        return item
+      })
+
+      state.products = [...result]
+    },
+
+    updateAllCheckProduct (state, check) {
+      const result = state.products.map(item => {
+        return { ...item, selected: check }
+      })
+      state.products = [...result]
     }
   },
   actions: {

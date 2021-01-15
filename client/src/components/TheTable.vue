@@ -5,7 +5,7 @@
         <thead>
           <tr>
             <th>
-              <input type="checkbox"/>
+              <input type="checkbox" @change="checkProducts($event)" />
             </th>
             <th>Название</th>
             <th>Количество(шт)</th>
@@ -15,9 +15,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="product in allProducts" :key="product.id">
+          <tr v-for="product in allProducts" :key="product._id">
             <td>
-              <input type="checkbox" :checked="product.selected"/>
+              <input type="checkbox" @change="checkProduct($event, product._id)" :checked="product.selected"/>
             </td>
             <td>{{ product.name }}</td>
             <td>{{ product.count }}</td>
@@ -39,7 +39,17 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
 
   computed: mapGetters(['allProducts']),
-  methods: mapActions(['getProducts']),
+
+  methods: {
+    ...mapActions(['getProducts']),
+    checkProduct: function (event, id) {
+      this.$store.commit('updateCheckProduct', id)
+    },
+    checkProducts: function (event) {
+      this.$store.commit('updateAllCheckProduct', event.target.checked)
+    }
+  },
+
   async mounted () {
     this.getProducts()
   }
