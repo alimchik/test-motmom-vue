@@ -24,7 +24,7 @@
             <td>{{ product.price }}</td>
             <td>{{ product.date_add }}</td>
             <td>
-              <i class="far fa-trash-alt rm-product"></i>
+              <i class="far fa-trash-alt rm-product" @click.prevent="removeProductHandler($event, product._id)"></i>
             </td>
           </tr>
         </tbody>
@@ -42,11 +42,20 @@ export default {
 
   methods: {
     ...mapActions(['getProducts']),
+
     checkProduct: function (event, id) {
       this.$store.commit('updateCheckProduct', id)
     },
+
     checkProducts: function (event) {
       this.$store.commit('updateAllCheckProduct', event.target.checked)
+    },
+
+    removeProductHandler: function (event, id) {
+      const conf = confirm('Вы действительно хотите удалить товар?')
+      if (conf) {
+        this.$store.dispatch('removeProduct', [id])
+      }
     }
   },
 

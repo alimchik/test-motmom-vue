@@ -49,6 +49,28 @@ export default {
         console.log(e.response.data.message)
       }
       ctx.commit('insertProducts', result.data)
+    },
+
+    async removeProduct (ctx, ids) {
+      let result = []
+      try {
+        result = await axios({
+          method: 'DELETE',
+          url: 'http://localhost:5000/api/product',
+          data: {
+            data: ids
+          }
+        })
+      } catch (e) {
+        // toast.error(e.response.data.message);
+        console.log(e.response.data.message)
+      }
+
+      if (result.status === 200) {
+        console.log('ok')
+        // actions.getProducts();
+        // toast.success(result.data.message);
+      }
     }
   }
 }
