@@ -11,13 +11,26 @@
             <input type='text' placeholder='Поиск'/>
           </div>
           <div class="btnContainer">
-            <button class="rmvActive">Удалить товары</button>
+            <button class="rmvActive" @click="removeProducts">Удалить товары</button>
             <router-link to='products/add' class='add'>Добавить товар</router-link>
           </div>
         </div>
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  methods: {
+    removeProducts: function () {
+      const conf = window.confirm('Вы действительно хотите удалить товар(ы)?')
+      if (conf) {
+        this.$store.dispatch('removeProductsMulti')
+      }
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 .title {

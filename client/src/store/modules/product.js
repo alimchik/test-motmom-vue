@@ -51,7 +51,7 @@ export default {
       ctx.commit('insertProducts', result.data)
     },
 
-    async removeProduct (ctx, ids) {
+    async removeProduct ({ dispatch }, ids) {
       let result = []
       try {
         result = await axios({
@@ -67,10 +67,14 @@ export default {
       }
 
       if (result.status === 200) {
-        console.log('ok')
-        // actions.getProducts();
+        await dispatch('getProducts')
         // toast.success(result.data.message);
       }
+    },
+
+    async removeProductsMulti ({ dispatch, state }) {
+      const arrIds = state.products.filter(item => item.selected)
+      await dispatch('removeProduct', arrIds)
     }
   }
 }
