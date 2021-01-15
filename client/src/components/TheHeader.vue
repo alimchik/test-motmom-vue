@@ -8,7 +8,7 @@
       <div class='search-container'>
           <div class='search'>
             <span><i class="fa fa-search"></i></span>
-            <input type='text' placeholder='Поиск'/>
+            <input type='text' placeholder='Поиск' v-model="inputValue" @input="findProduct"/>
           </div>
           <div class="btnContainer">
             <button class="rmvActive" @click="removeProducts">Удалить товары</button>
@@ -20,14 +20,25 @@
 </template>
 
 <script>
+import { debounce } from 'lodash'
+
 export default {
+  data () {
+    return {
+      inputValue: ''
+    }
+  },
+
   methods: {
     removeProducts: function () {
       const conf = window.confirm('Вы действительно хотите удалить товар(ы)?')
       if (conf) {
         this.$store.dispatch('removeProductsMulti')
       }
-    }
+    },
+    findProduct: debounce(function () {
+      this.$store.dispatch('getProducts', this.inputValue)
+    }, 500)
   }
 }
 </script>
