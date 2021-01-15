@@ -15,14 +15,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr v-for="product in allProducts" :key="product.id">
             <td>
-              <input type="checkbox"/>
+              <input type="checkbox" :checked="product.selected"/>
             </td>
-            <td/>
-            <td/>
-            <td/>
-            <td/>
+            <td>{{ product.name }}</td>
+            <td>{{ product.count }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.date_add }}</td>
             <td>
               <i class="far fa-trash-alt rm-product"></i>
             </td>
@@ -32,6 +32,19 @@
     </div>
   </section>
 </template>
+
+<script>
+import { mapGetters, mapActions } from 'vuex'
+
+export default {
+
+  computed: mapGetters(['allProducts']),
+  methods: mapActions(['getProducts']),
+  async mounted () {
+    this.getProducts()
+  }
+}
+</script>
 
 <style lang="scss">
 .products {
