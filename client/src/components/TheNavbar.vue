@@ -9,7 +9,6 @@
           <router-link class="btn-wrap__login btn mar-right" to="/login">Войти</router-link>
           <router-link class="btn-wrap__registration btn" to="/registration">Регистрация</router-link>
         </div>
-        <router-view></router-view>
       </div>
     </div>
   </header>

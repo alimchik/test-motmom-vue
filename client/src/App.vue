@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <TheNavbar />
-    <Products />
+    <portal-target name="modal-window"></portal-target>
+     <TheNavbar />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Products from './views/Products'
 import TheNavbar from './components/TheNavbar'
 
 export default {
   components: {
-    Products,
     TheNavbar
   }
 }

@@ -13,6 +13,7 @@
           <div class="btnContainer">
             <button class="rmvActive" @click="removeProducts">Удалить товары</button>
             <router-link to='products/add' class='add'>Добавить товар</router-link>
+            <router-view></router-view>
           </div>
         </div>
     </div>

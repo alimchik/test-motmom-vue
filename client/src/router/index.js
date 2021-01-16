@@ -2,13 +2,20 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Products from '../views/Products'
 import Auth from '../views/Auth'
+import Modal from '../components/Modal'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/products',
-    component: Products
+    component: Products,
+    children: [
+      {
+        path: 'add',
+        component: Modal
+      }
+    ]
   },
 
   {
