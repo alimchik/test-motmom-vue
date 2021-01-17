@@ -3,8 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import PortalVue from 'portal-vue'
+import VueToast from 'vue-toast-notification'
 
 Vue.use(PortalVue)
+Vue.use(VueToast)
 
 Vue.config.productionTip = false
 

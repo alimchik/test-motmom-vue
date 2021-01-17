@@ -3,13 +3,13 @@
     <h3 v-if="getUrl === 'login'">Войти </h3>
     <h3 v-else>Регистарция</h3>
     <div class="form-row">
-      <input type="text" id="email" required><label for="email">Email</label>
+      <input type="text" id="email" required v-model="email"><label for="email">Email</label>
     </div>
     <div class="form-row">
-      <input type="password" id="password" required><label for="password">Пароль</label>
+      <input type="password" id="password" required v-model="password"><label for="password">Пароль</label>
     </div>
-    <button v-if="getUrl === 'login'">Войти</button>
-    <button v-else>Регистрация</button>
+    <button v-if="getUrl === 'login'" @click.prevent="loginHandler">Войти</button>
+    <button v-else @click.prevent="registrHandler">Регистрация</button>
   </div>
 </template>
 
@@ -18,6 +18,35 @@ export default {
   computed: {
     getUrl: function () {
       return this.$route.path.substring(1, this.$route.path.length)
+    }
+  },
+
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+
+  methods: {
+    registrHandler: function () {
+      const email = this.email
+      const password = this.password
+      this.$store.dispatch('registr', { email, password })
+        .then((data) => {
+          this.$toast.success(data)
+          this.$router.push('/login')
+        })
+        .catch(err => this.$toast.error(err.message))
+    },
+    loginHandler: function () {
+      const email = this.email
+      const password = this.password
+      this.$store.dispatch('login', { email, password })
+        .then((data) => {
+          this.$router.push('/products')
+        })
+        .catch(err => this.$toast.error(err.message))
     }
   }
 }

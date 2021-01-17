@@ -2,7 +2,7 @@
   <header class="navbar">
     <div class="container">
       <div class="btn-container">
-        <button class="btn-container__logout btn" v-if="isAuthorized">
+        <button class="btn-container__logout btn" v-if="isLoggedIn" @click="logout">
           Выйти
         </button>
         <div class="btn-wrap" v-else>
@@ -17,8 +17,14 @@
 <script>
 export default {
   computed: {
-    isAuthorized () {
-      return this.$store.getters.getAutorized
+    isLoggedIn () {
+      return this.$store.getters.isLoggedIn
+    }
+  },
+  methods: {
+    logout: function () {
+      this.$store.commit('logout')
+      this.$router.push('/login')
     }
   }
 }

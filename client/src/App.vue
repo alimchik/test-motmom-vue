@@ -8,6 +8,7 @@
 
 <script>
 import TheNavbar from './components/TheNavbar'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
 export default {
   components: {
