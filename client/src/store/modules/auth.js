@@ -1,6 +1,6 @@
 export default {
   state: {
-    isAuthorized: true
+    isAuthorized: false
   },
   getters: {
     getAutorized (state) {
