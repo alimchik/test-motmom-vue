@@ -55,6 +55,10 @@ router.beforeEach((to, from, next) => {
     if (store.getters.isLoggedIn) {
       next('products')
       return
+    } else {
+      if (to.path !== '/login' && to.path !== '/registration') {
+        next('/login')
+      }
     }
     next()
   }

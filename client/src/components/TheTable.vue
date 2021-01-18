@@ -10,7 +10,7 @@
             <th>Название</th>
             <th>Количество(шт)</th>
             <th>Цена(руб)</th>
-            <th>Дата и время добавления</th>
+            <th>Дата добавления</th>
             <th></th>
             <th></th>
           </tr>
@@ -96,6 +96,12 @@ export default {
       padding: 15px 10px;
       border-bottom: 1px solid #e8e9eb;
     }
+  }
+
+  .edit-product {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
   }
 
   .rm-product {

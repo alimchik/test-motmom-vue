@@ -11,9 +11,12 @@
             <input type='text' placeholder='Поиск' v-model="inputValue" @input="findProduct"/>
           </div>
           <div class="btnContainer">
-            <button class="rmvActive" @click="removeProducts">Удалить товары</button>
+            <button class="rmvActive"
+                    @click="removeProducts"
+                    v-bind:class="{ rmvActive: isSomeItemSelected, rmvDisabled: !isSomeItemSelected }"
+                    :disabled="!isSomeItemSelected"
+            >Удалить товары</button>
             <router-link to='products/add' class='add'>Добавить товар</router-link>
-            <router-view></router-view>
           </div>
         </div>
     </div>
@@ -22,6 +25,7 @@
 
 <script>
 import { debounce } from 'lodash'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -29,6 +33,8 @@ export default {
       inputValue: ''
     }
   },
+
+  computed: mapGetters(['isSomeItemSelected']),
 
   methods: {
     removeProducts: function () {

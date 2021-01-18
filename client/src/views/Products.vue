@@ -2,6 +2,7 @@
   <main>
     <TheHeader />
     <TheTable />
+    <router-view></router-view>
   </main>
 </template>
 

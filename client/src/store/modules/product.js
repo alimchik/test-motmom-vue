@@ -1,4 +1,5 @@
 import axios from 'axios'
+import formatData from '../../helpers/formatData.js'
 
 export default {
   state: {
@@ -6,7 +7,12 @@ export default {
   },
   getters: {
     allProducts (state) {
-      return state.products
+      return state.products.map(item => {
+        return { ...item, date_add: formatData(item.date_add, 'yyyy-mm-dd') }
+      })
+    },
+    isSomeItemSelected (state) {
+      return state.products.some(item => item.selected === true)
     }
   },
   mutations: {
