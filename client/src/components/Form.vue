@@ -1,66 +1,72 @@
 <template>
   <form class="form" @submit.prevent="submitHandler">
-    <Field
-      nameFieldText='Название товара'
-      nameField='name'
-      placeholder='Введите строку'
-      type='text'
-      @handler-value-change='handlerValueChange'
-    />
-    <Field
-      nameFieldText='Количество товра'
-      nameField='count'
-      placeholder='шт'
-      type='text'
-      @handler-value-change='handlerValueChange'
-    />
-    <Field
-      nameFieldText='Стоимость товара'
-      nameField='price'
-      placeholder='руб.'
-      type='text'
-      @handler-value-change='handlerValueChange'
-    />
-    <Field
-      nameFieldText='Дата добавления'
-      nameField='date_add'
-      placeholder=''
-      type='date'
-      @handler-value-change='handlerValueChange'
-    />
+    <label class='field'>
+      <span class='label'>
+        Название товара
+      </span>
+      <input
+        class='input'
+        type='text'
+        placeholder='Введите строку'
+        v-model="name"
+      />
+    </label>
+    <label class='field'>
+      <span class='label'>
+        Количество товра
+      </span>
+      <input
+        class='input'
+        type='text'
+        placeholder='шт'
+        v-model="count"
+      />
+    </label>
+    <label class='field'>
+      <span class='label'>
+        Стоимость товара
+      </span>
+      <input
+        class='input'
+        type='text'
+        placeholder='руб.'
+        v-model="price"
+      />
+    </label>
+    <label class='field'>
+      <span class='label'>
+        Дата добавления
+      </span>
+      <input
+        class='input'
+        type='date'
+        v-model="date_add"
+      />
+    </label>
     <button @submit="submitHandler">{{ title }}</button>
   </form>
 </template>
 
 <script>
-import Field from './Field'
 
 export default {
   data () {
     return {
-      product: {
-        name: '',
-        count: '',
-        price: '',
-        date_add: ''
-      }
+      name: '',
+      count: '',
+      price: '',
+      date_add: ''
     }
   },
   props: ['title'],
-  components: {
-    Field
-  },
 
   methods: {
-    handlerValueChange (field) {
-      this.product = { ...this.product, ...field }
-    },
     submitHandler () {
       const product = {
-        name: this.product.name,
-        count: this.product.count,
-        price: this.product.price,
-        date_add: this.product.date_add
+        name: this.name,
+        count: this.count,
+        price: this.price,
+        date_add: this.date_add
       }
 
       // если изменяем продукт
@@ -87,7 +93,10 @@ export default {
     if (this.$route.params.id) {
       this.$store.dispatch('getProduct', this.$route.params.id)
         .then(data => {
-          console.log(data)
+          this.name = data.name
+          this.count = data.count
+          this.price = data.price
+          this.date_add = data.date_add
         })
         .catch(err => this.$toast.error(err.message))
     }
@@ -101,6 +110,30 @@ export default {
   flex-direction: column;
   padding: 20px 20px;
   justify-content: space-between;
+  .field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+  }
+
+  .label {
+      margin-bottom: 5px;
+  }
+
+  .input {
+      margin-bottom: 0 !important;
+      display: block;
+      width: 100%;
+      padding: 0 10px;
+      line-height: 40px;
+  }
+
+  .error {
+      display: block;
+      height: 16px;
+      font-size: 13px;
+      color: red;
+  }
 
   button {
     width: 100%;
