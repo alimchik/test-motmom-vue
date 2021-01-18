@@ -51,10 +51,19 @@ export default {
       try {
         result = await axios.get(url)
       } catch (e) {
-        // toast.error(e.response.data.message);
-        console.log(e.response.data.message)
+        throw new Error(e.response.data.message)
       }
       commit('insertProducts', result.data)
+    },
+
+    async getProduct ({ commit }, id) {
+      let result = []
+      try {
+        result = await axios.get(`http://localhost:5000/api/product/${id}`)
+      } catch (e) {
+        throw new Error(e.response.data.message)
+      }
+      return Promise.resolve(result.data)
     },
 
     async removeProduct ({ dispatch }, ids) {

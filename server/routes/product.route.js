@@ -55,6 +55,25 @@ router.get('/', async (req, res) => {
   res.status(200).json(prdct);
 });
 
+// /api/product/:id
+router.get('/:id', async (req, res) => {
+  let product = [];
+  try {
+    product = await Product.findById(req.params.id);
+  } catch (e) {
+    res.status(500).json({ message: 'что-то пошло не так' });
+  }
+
+  const result = {
+    name: product.name,
+    count: product.count,
+    price: product.price,
+    date_add: product.date_add,
+  }
+
+  res.status(200).json(result);
+});
+
 // /api/product/
 router.delete('/', async (req, res) => {
   try {

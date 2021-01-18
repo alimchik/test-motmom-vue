@@ -63,6 +63,7 @@ export default {
         date_add: this.product.date_add
       }
 
+      // если изменяем продукт
       if (this.$route.params.id) {
         this.$store.dispatch('editProduct', { ...product, id: this.$route.params.id })
           .then((data) => {
@@ -73,10 +74,20 @@ export default {
         return
       }
 
+      // если добавляем продукт
       this.$store.dispatch('addProduct', product)
         .then((data) => {
           this.$router.push('/products')
           this.$toast.success(data)
+        })
+        .catch(err => this.$toast.error(err.message))
+    }
+  },
+  mounted () {
+    if (this.$route.params.id) {
+      this.$store.dispatch('getProduct', this.$route.params.id)
+        .then(data => {
+          console.log(data)
         })
         .catch(err => this.$toast.error(err.message))
     }
