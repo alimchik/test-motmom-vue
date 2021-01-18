@@ -16,7 +16,7 @@
                     v-bind:class="{ rmvActive: isSomeItemSelected, rmvDisabled: !isSomeItemSelected }"
                     :disabled="!isSomeItemSelected"
             >Удалить товары</button>
-            <router-link to='products/add' class='add'>Добавить товар</router-link>
+            <router-link :to='{name: "product-add"}' class='add'>Добавить товар</router-link>
           </div>
         </div>
     </div>

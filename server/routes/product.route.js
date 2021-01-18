@@ -81,8 +81,8 @@ router.patch(
       return res.status(400).json({ message: errors.errors[0].msg });
     }
 
-   const body = req.body;
-   await Product.update({_id: req.params.id}, {$set: body})
+   const { name, count, price, date_add } = req.body;
+   await Product.updateOne({ _id: req.params.id }, {$set: { name, count, price, date_add }})
   } catch (e) {
     res.status(500).json({ message: 'что-то пошло не так' });
   }

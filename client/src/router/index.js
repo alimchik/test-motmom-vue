@@ -14,11 +14,19 @@ const routes = [
     children: [
       {
         path: 'add',
-        component: Modal
+        name: 'product-add',
+        component: Modal,
+        props: {
+          title: 'Добавить'
+        }
       },
       {
         path: ':id/edit',
-        component: Modal
+        name: 'product-edit',
+        component: Modal,
+        props: {
+          title: 'Изменить'
+        }
       }
     ],
     meta: {

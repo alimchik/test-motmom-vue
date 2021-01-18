@@ -44,7 +44,7 @@ export default {
     }
   },
   actions: {
-    async getProducts (ctx, param = '') {
+    async getProducts ({ commit }, param = '') {
       let result = []
       const qweryParams = param ? `?name=${param}` : ''
       const url = new URL(qweryParams, 'http://localhost:5000/api/product')
@@ -54,7 +54,7 @@ export default {
         // toast.error(e.response.data.message);
         console.log(e.response.data.message)
       }
-      ctx.commit('insertProducts', result.data)
+      commit('insertProducts', result.data)
     },
 
     async removeProduct ({ dispatch }, ids) {
@@ -68,19 +68,45 @@ export default {
           }
         })
       } catch (e) {
-        // toast.error(e.response.data.message);
-        console.log(e.response.data.message)
+        throw new Error(e.response.data.message)
       }
 
       if (result.status === 200) {
         await dispatch('getProducts')
-        // toast.success(result.data.message);
+        return Promise.resolve(result.data.message)
       }
     },
 
     async removeProductsMulti ({ dispatch, state }) {
       const arrIds = state.products.filter(item => item.selected)
       await dispatch('removeProduct', arrIds)
+    },
+
+    async addProduct ({ commit, dispatch }, product) {
+      let status = null
+      let result = []
+      try {
+        result = await axios.post('http://localhost:5000/api/product/add', product)
+        status = result.status
+      } catch (e) {
+        throw new Error(e.response.data.message)
+      }
+
+      if (status === 201) {
+        await dispatch('getProducts')
+        return Promise.resolve(result.data.message)
+      }
+    },
+
+    async editProduct ({ dispatch }, product) {
+      let result = []
+      try {
+        result = await axios.patch(`http://localhost:5000/api/product/${product.id}`, product)
+      } catch (e) {
+        throw new Error(e.response.data.message)
+      }
+      await dispatch('getProducts')
+      return Promise.resolve(result.data.message)
     }
   }
 }

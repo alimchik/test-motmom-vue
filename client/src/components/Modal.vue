@@ -4,23 +4,29 @@
     </div>
     <div class="window">
       <div class="header">
-        <h3>Добавить</h3>
+        <h3>{{ title }}</h3>
         <router-link to='/products'>
           <i class='fas fa-times'></i>
         </router-link>
       </div>
-      <div className="body">
+      <div class="body">
+        <Form :title="title" />
       </div>
     </div>
   </portal>
 </template>
 
 <script>
+import Form from './Form'
 export default {
+  props: ['title'],
   methods: {
     closeModal: function () {
       this.$router.go(-1)
     }
+  },
+  components: {
+    Form
   }
 }
 </script>
@@ -41,13 +47,13 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
   min-height: 200px;
+  width: 100%;
   min-width: 320px;
   max-width: 600px;
   box-sizing: border-box;
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   border-radius: 10px;
 
   .header {
@@ -65,6 +71,9 @@ export default {
         color: rgb(136, 6, 6);
       }
     }
+  }
+  .bodu {
+    flex-grow: 1;
   }
 }
 </style>

@@ -81,7 +81,6 @@ export default {
       width: 100%;
       padding: 0 10px;
       line-height: 40px;
-      font-family: 'Roboto', sans-serif;
       background: none;
       border-width: 0;
       border-bottom: 2px solid #4a90e2;

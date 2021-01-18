@@ -25,7 +25,7 @@
             <td>{{ product.price }}</td>
             <td>{{ product.date_add }}</td>
             <td>
-              <router-link :to="{path: `products/${product._id}/edit`}"><i class="fas fa-edit edit-product"></i></router-link>
+              <router-link :to="{name: 'product-edit', params:{ id: product._id }}"><i class="fas fa-edit edit-product"></i></router-link>
             </td>
             <td>
               <i class="far fa-trash-alt rm-product" @click.prevent="removeProductHandler($event, product._id)"></i>
@@ -59,6 +59,10 @@ export default {
       const conf = confirm('Вы действительно хотите удалить товар?')
       if (conf) {
         this.$store.dispatch('removeProduct', [id])
+          .then((data) => {
+            this.$toast.success(data)
+          })
+          .catch(err => this.$toast.error(err.message))
       }
     }
   },
