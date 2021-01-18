@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <portal-target name="modal-window"></portal-target>
-     <TheNavbar />
+    <TheNavbar />
     <router-view></router-view>
   </div>
 </template>

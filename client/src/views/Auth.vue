@@ -1,7 +1,7 @@
 <template>
   <div class="form">
-    <h3 v-if="getUrl === 'login'">Войти </h3>
-    <h3 v-else>Регистарция</h3>
+    <h3 v-if="getUrl === 'login'">Войти</h3>
+    <h3 v-else>Регистрация</h3>
     <div class="form-row">
       <input type="text" id="email" required v-model="email"><label for="email">Email</label>
     </div>

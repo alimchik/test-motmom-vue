@@ -12,6 +12,7 @@
             <th>Цена(руб)</th>
             <th>Дата и время добавления</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -23,6 +24,9 @@
             <td>{{ product.count }}</td>
             <td>{{ product.price }}</td>
             <td>{{ product.date_add }}</td>
+            <td>
+              <router-link :to="{path: `products/${product._id}/edit`}"><i class="fas fa-edit edit-product"></i></router-link>
+            </td>
             <td>
               <i class="far fa-trash-alt rm-product" @click.prevent="removeProductHandler($event, product._id)"></i>
             </td>

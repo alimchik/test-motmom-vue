@@ -15,6 +15,10 @@ const routes = [
       {
         path: 'add',
         component: Modal
+      },
+      {
+        path: ':id/edit',
+        component: Modal
       }
     ],
     meta: {
@@ -48,6 +52,10 @@ router.beforeEach((to, from, next) => {
     }
     next('/login')
   } else {
+    if (store.getters.isLoggedIn) {
+      next('products')
+      return
+    }
     next()
   }
 })
