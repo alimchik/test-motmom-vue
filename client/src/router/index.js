@@ -1,32 +1,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store/index.js'
-import Products from '../views/Products'
+import List from '../views/products/List'
 import Auth from '../views/Auth'
-import Modal from '../components/Modal'
+import New from '../views/products/New'
+import Edit from '../views/products/Edit'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/products',
-    component: Products,
+    component: List,
     children: [
       {
-        path: 'add',
-        name: 'product-add',
-        component: Modal,
-        props: {
-          title: 'Добавить'
-        }
+        path: 'new',
+        name: 'product-new',
+        component: New
       },
       {
         path: ':id/edit',
         name: 'product-edit',
-        component: Modal,
-        props: {
-          title: 'Изменить'
-        }
+        component: Edit
       }
     ],
     meta: {
