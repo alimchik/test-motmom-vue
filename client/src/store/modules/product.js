@@ -3,13 +3,17 @@ import formatData from '../../helpers/formatData.js'
 
 export default {
   state: {
-    products: []
+    products: [],
+    product: {}
   },
   getters: {
     allProducts (state) {
       return state.products.map(item => {
-        return { ...item, date_add: formatData(item.date_add, 'yyyy-mm-dd') }
+        return { ...item, date_add: formatData(item.date_add, 'dd.mm.yyyy') }
       })
+    },
+    product (state) {
+      return { ...state.product, date_add: formatData(state.product.date_add, 'yyyy-mm-dd') }
     },
     isSomeItemSelected (state) {
       return state.products.some(item => item.selected === true)
@@ -23,6 +27,10 @@ export default {
       })
 
       state.products = result2
+    },
+
+    insertProduct (state, product) {
+      state.product = product
     },
 
     updateCheckProduct (state, id) {
@@ -63,7 +71,8 @@ export default {
       } catch (e) {
         throw new Error(e.response.data.message)
       }
-      return Promise.resolve(result.data)
+      // return Promise.resolve(result.data)
+      commit('insertProduct', result.data)
     },
 
     async removeProduct ({ dispatch }, ids) {

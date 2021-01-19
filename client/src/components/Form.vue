@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -58,6 +59,9 @@ export default {
       date_add: ''
     }
   },
+
+  computed: mapGetters(['product']),
+
   props: ['title'],
 
   methods: {
@@ -93,10 +97,10 @@ export default {
     if (this.$route.params.id) {
       this.$store.dispatch('getProduct', this.$route.params.id)
         .then(data => {
-          this.name = data.name
-          this.count = data.count
-          this.price = data.price
-          this.date_add = data.date_add
+          this.name = this.product.name
+          this.count = this.product.count
+          this.price = this.product.price
+          this.date_add = this.product.date_add
         })
         .catch(err => this.$toast.error(err.message))
     }
