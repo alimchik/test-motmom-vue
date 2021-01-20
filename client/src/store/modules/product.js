@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { myAxios } from '@/api/http-common'
 import formatData from '../../helpers/formatData.js'
 
 export default {
@@ -59,9 +59,9 @@ export default {
     async getProducts ({ commit }, param = '') {
       let result = []
       const qweryParams = param ? `?name=${param}` : ''
-      const url = new URL(qweryParams, 'http://localhost:5000/api/product')
+      const url = `product${qweryParams}`
       try {
-        result = await axios.get(url)
+        result = await myAxios.get(url)
       } catch (e) {
         throw new Error(e.response.data.message)
       }
@@ -71,7 +71,7 @@ export default {
     async getProduct ({ commit }, id) {
       let result = []
       try {
-        result = await axios.get(`http://localhost:5000/api/product/${id}`)
+        result = await myAxios.get(`product/${id}`)
       } catch (e) {
         throw new Error(e.response.data.message)
       }
@@ -82,9 +82,9 @@ export default {
     async removeProduct ({ dispatch }, ids) {
       let result = []
       try {
-        result = await axios({
+        result = await myAxios({
           method: 'DELETE',
-          url: 'http://localhost:5000/api/product',
+          url: 'product',
           data: {
             data: ids
           }
@@ -108,7 +108,7 @@ export default {
       let status = null
       let result = []
       try {
-        result = await axios.post('http://localhost:5000/api/product/add', product)
+        result = await myAxios.post('product/add', product)
         status = result.status
       } catch (e) {
         throw new Error(e.response.data.message)
@@ -123,7 +123,7 @@ export default {
     async editProduct ({ commit }, product) {
       let result = []
       try {
-        result = await axios.patch(`http://localhost:5000/api/product/${product.id}`, product)
+        result = await myAxios.patch(`product/${product.id}`, product)
       } catch (e) {
         throw new Error(e.response.data.message)
       }

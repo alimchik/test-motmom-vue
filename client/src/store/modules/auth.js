@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { myAxios } from '@/api/http-common'
 
 export default {
   state: {
@@ -31,7 +31,7 @@ export default {
   actions: {
     async registr ({ commit }, user) {
       try {
-        const result = await axios.post('http://localhost:5000/api/auth/registr', user)
+        const result = await myAxios.post('auth/registr', user)
         if (result.status === 201) {
           return Promise.resolve(result.data.message)
         }
@@ -42,7 +42,7 @@ export default {
     async login ({ commit }, user) {
       commit('auth_request')
       try {
-        const result = await axios.post('http://localhost:5000/api/auth/login', user)
+        const result = await myAxios.post('auth/login', user)
         if (result.status === 200) {
           const token = result.data.token
           const user = result.data.user
