@@ -2,9 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store/index.js'
 import List from '../views/products/List'
-import Auth from '../views/Auth'
 import New from '../views/products/New'
 import Edit from '../views/products/Edit'
+import Login from '../views/Login'
+import Regiistration from '../views/Registration'
 
 Vue.use(VueRouter)
 
@@ -31,12 +32,12 @@ const routes = [
 
   {
     path: '/login',
-    component: Auth
+    component: Login
   },
 
   {
     path: '/registration',
-    component: Auth
+    component: Regiistration
   }
 
 ]

@@ -49,6 +49,10 @@ export default {
         return { ...item, selected: check }
       })
       state.products = [...result]
+    },
+
+    updateProduct (state, product) {
+      state.products = [...state.products.filter(item => item._id !== product.id), product]
     }
   },
   actions: {
@@ -116,15 +120,15 @@ export default {
       }
     },
 
-    async editProduct ({ dispatch }, product) {
+    async editProduct ({ commit }, product) {
       let result = []
       try {
         result = await axios.patch(`http://localhost:5000/api/product/${product.id}`, product)
       } catch (e) {
         throw new Error(e.response.data.message)
       }
-      await dispatch('getProducts')
-      return Promise.resolve(result.data.message)
+      commit('updateProduct', result.data)
+      return Promise.resolve('Данные успешно обновленны')
     }
   }
 }

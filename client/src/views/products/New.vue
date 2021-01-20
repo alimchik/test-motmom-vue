@@ -1,5 +1,6 @@
 <template>
   <ProductForm
+    @go-to-page='goToPage'
     title='Добавить'
   />
 </template>
@@ -11,6 +12,12 @@ export default {
 
   components: {
     ProductForm
+  },
+
+  methods: {
+    goToPage: function () {
+      this.$router.push('/products')
+    }
   }
 }
 </script>

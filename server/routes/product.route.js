@@ -93,19 +93,28 @@ router.patch(
     body('date_add','Поле Дата и время должныть формата YYYY-MM-DD').optional().isDate({ format: 'YYYY-MM-DD', strictMode: true, delimiters: ['-'] })
   ], 
   async (req, res) => {
-  try {
+    let product = []
+    try {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: errors.errors[0].msg });
     }
 
-   const { name, count, price, date_add } = req.body;
-   await Product.updateOne({ _id: req.params.id }, {$set: { name, count, price, date_add }})
-  } catch (e) {
-    res.status(500).json({ message: 'что-то пошло не так' });
-  }
-  res.status(200).json({ message: 'Поле успешно обновленно' });
+    const { name, count, price, date_add } = req.body;
+    await Product.updateOne({ _id: req.params.id }, {$set: { name, count, price, date_add }})
+    product = await Product.findById(req.params.id);
+    } catch (e) {
+      res.status(500).json({ message: 'что-то пошло не так' });
+    }
+    const result = {
+      name: product.name,
+      count: product.count,
+      price: product.price,
+      date_add: product.date_add,
+      id: product._id
+    }
+    res.status(200).json(result);
 });
 
 module.exports = router;
