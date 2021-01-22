@@ -4,6 +4,8 @@ import router from './router'
 import store from './store'
 import PortalVue from 'portal-vue'
 import VueToast from 'vue-toast-notification'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 Vue.use(PortalVue)
 Vue.use(VueToast)

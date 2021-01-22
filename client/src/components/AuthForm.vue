@@ -1,15 +1,45 @@
 <template>
-  <div class="form">
-    <h3 v-if="getUrl === 'login'">Войти</h3>
-    <h3 v-else>Регистрация</h3>
-    <div class="form-row">
-      <input type="text" id="email" required v-model="email"><label for="email">Email</label>
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-11 col-lg-8 p-3 p-sm-5 shadow">
+        <h2 v-if="getUrl === 'login'" class="h3 mb-3 text-center">Войти</h2>
+        <h2 v-else class="h3 mb-3 text-center">Регистрация</h2>
+        <form class="bg-white p-3 border rounded" @submit.prevent="submitHandler">
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control"
+                  placeholder="Введите ваш email"
+                  required
+                  v-model="email"
+                >
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="password">Пароль</label>
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  placeholder="Введите ваш пароль"
+                  required
+                  v-model="password"
+                >
+              </div>
+            </div>
+          </div>
+          <button v-if="getUrl === 'login'" @click.prevent="submitHandler" class="btn btn-outline-success btn-lg btn-block">Войти</button>
+          <button v-else @submit.prevent="submitHandler" class="btn btn-outline-success btn-lg btn-block">Регистрация</button>
+        </form>
+      </div>
     </div>
-    <div class="form-row">
-      <input type="password" id="password" required v-model="password"><label for="password">Пароль</label>
-    </div>
-    <button v-if="getUrl === 'login'" @click.prevent="loginHandler">Войти</button>
-    <button v-else @click.prevent="registrHandler">Регистрация</button>
   </div>
 </template>
 
@@ -29,119 +59,27 @@ export default {
   },
 
   methods: {
-    registrHandler: function () {
+    submitHandler: function () {
       const email = this.email
       const password = this.password
+
+      // Вход в систему
+      if (this.getUrl === 'login') {
+        this.$store.dispatch('login', { email, password })
+          .then((data) => {
+            this.$router.push('/products')
+          })
+          .catch(err => this.$toast.error(err.message))
+        return
+      }
+      // Регистрация
       this.$store.dispatch('registr', { email, password })
         .then((data) => {
           this.$toast.success(data)
           this.$router.push('/login')
         })
         .catch(err => this.$toast.error(err.message))
-    },
-    loginHandler: function () {
-      const email = this.email
-      const password = this.password
-      this.$store.dispatch('login', { email, password })
-        .then((data) => {
-          this.$router.push('/products')
-        })
-        .catch(err => this.$toast.error(err.message))
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.form {
-  width: 100%;
-  min-width: 320px;
-  max-width: 600px;
-  margin: 50px auto 30px;
-  padding: 80px 30px 30px;
-  background: white;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-
-  h3 {
-    position: relative;
-    z-index: 5;
-    margin: 0 0 60px;
-    text-align: center;
-    color: #4a90e2;
-    font-size: 30px;
-    font-weight: normal;
-  }
-  .form-row {
-    position: relative;
-    margin-bottom: 40px;
-
-    input {
-      display: block;
-      width: 100%;
-      padding: 0 10px;
-      line-height: 40px;
-      background: none;
-      border-width: 0;
-      border-bottom: 2px solid #4a90e2;
-      transition: all 0.2s ease;
-
-      &:focus {
-        outline: 0;
-        border-color: #F77A52;
-      }
-
-      &:focus + label {
-        transform: translateY(-60px);
-        margin-left: -14px;
-        font-size: 14px;
-        font-weight: 400;
-        outline: 0;
-        border-color: #F77A52;
-        color: #F77A52;
-      }
-
-      &:valid + label {
-        transform: translateY(-60px);
-        margin-left: -14px;
-        font-size: 14px;
-        font-weight: 400;
-        outline: 0;
-        border-color: #F77A52;
-        color: #F77A52;
-      }
-    }
-
-    label {
-      position: absolute;
-      left: 13px;
-      color: #9d959d;
-      font-size: 20px;
-      font-weight: 300;
-      transform: translateY(-35px);
-      transition: all 0.2s ease;
-    }
-  }
-
-  button {
-    width: 100%;
-    padding: 0;
-    line-height: 42px;
-    background: #4a90e2;
-    border-width: 0;
-    color: white;
-    font-size: 20px;
-    border-radius: 5px;
-
-    &:focus {
-      border-width: 0;
-      outline: none;
-      background: #4a90e2;
-    }
-
-    &:hover {
-      background: #63a6f1;
-    }
-  }
-}
-</style>
