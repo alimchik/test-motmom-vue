@@ -1,6 +1,6 @@
 {
   "port": 5000,
-  "mongoUri": "mongodb+srv://artyom:19252630a@cluster0.yfmsz.azure.mongodb.net/test-motmom?retryWrites=true&w=majority",
+  "mongoUri": "mongodb+srv://artyom:19252630a@cluster0.wxmt8.mongodb.net/test-motmom2?retryWrites=true&w=majority",
   "mongoUriLocalContainer": "mongodb://mongo:27017/test-motmom",
   "mongoUriLocal": "mongodb://localhost:27017/test-motmom",
   "jwtSecret": "test motmom"

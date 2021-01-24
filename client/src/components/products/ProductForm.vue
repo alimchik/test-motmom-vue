@@ -2,60 +2,76 @@
   <portal to="modal-window">
     <div class="modal-background" @click="closeModal">
     </div>
-    <div class="window">
-      <div class="header">
-        <h3>{{ title }}</h3>
+    <div class="window shadow">
+      <div class="header p-4">
+        <h2 class="h3">{{ title }}</h2>
         <router-link to='/products'>
           <i class='fas fa-times'></i>
         </router-link>
       </div>
       <div class="body">
-          <form class="form" @submit.prevent="submitHandler">
-            <label class='field'>
-              <span class='label'>
-                Название товара
-              </span>
-              <input
-                class='input'
-                type='text'
-                placeholder='Введите строку'
-                v-model="name"
-              />
-            </label>
-            <label class='field'>
-              <span class='label'>
-                Количество товра
-              </span>
-              <input
-                class='input'
-                type='text'
-                placeholder='шт'
-                v-model="count"
-              />
-            </label>
-            <label class='field'>
-              <span class='label'>
-                Стоимость товара
-              </span>
-              <input
-                class='input'
-                type='text'
-                placeholder='руб.'
-                v-model="price"
-              />
-            </label>
-            <label class='field'>
-              <span class='label'>
-                Дата добавления
-              </span>
-              <input
-                class='input'
-                type='date'
-                v-model="date_add"
-              />
-            </label>
-            <button @submit="submitHandler">{{ title }}</button>
-          </form>
+        <form class="bg-white p-3 border rounded m-4" @submit.prevent="submitHandler">
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="name-product">Название товара</label>
+                <input
+                  type="text"
+                  id="name-product"
+                  class="form-control"
+                  placeholder="Введите название товара"
+                  required
+                  v-model="name"
+                >
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="count">Количество товара</label>
+                <input
+                  type="text"
+                  id="count"
+                  class="form-control"
+                  placeholder="шт."
+                  required
+                  v-model="count"
+                >
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="price">Стоимость товара</label>
+                <input
+                  type="text"
+                  id="price"
+                  class="form-control"
+                  placeholder="руб."
+                  required
+                  v-model="price"
+                >
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="date_add">Дата добавления</label>
+                <input
+                  type="date"
+                  id="date_add"
+                  class="form-control"
+                  required
+                  v-model="date_add"
+                >
+              </div>
+            </div>
+          </div>
+          <button @submit="submitHandler" class="btn btn-outline-success btn-lg btn-block">{{ title }}</button>
+        </form>
       </div>
     </div>
   </portal>
@@ -134,6 +150,7 @@ export default {
   bottom: 0;
   right: 0;
   background-color: rgba(0,0,0,.3);
+  z-index: 10;
 }
 
 .window {
@@ -144,12 +161,12 @@ export default {
   min-height: 200px;
   width: 100%;
   min-width: 320px;
-  max-width: 600px;
+  max-width: 650px;
   box-sizing: border-box;
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
+  z-index: 20;
 
   .header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -157,7 +174,6 @@ export default {
     justify-content: space-between;
     box-sizing: border-box;
     align-items: center;
-    padding: 20px 20px;
 
     i {
       color: rgb(0, 0, 0);
@@ -167,57 +183,12 @@ export default {
       }
     }
   }
+}
 
-  .form {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 20px;
-    justify-content: space-between;
-    .field {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 10px;
-    }
-
-    .label {
-        margin-bottom: 5px;
-    }
-
-    .input {
-        margin-bottom: 0 !important;
-        display: block;
-        width: 100%;
-        padding: 0 10px;
-        line-height: 40px;
-    }
-
-    .error {
-        display: block;
-        height: 16px;
-        font-size: 13px;
-        color: red;
-    }
-
-    button {
-      width: 100%;
-      padding: 0;
-      line-height: 42px;
-      background: #4a90e2;
-      border-width: 0;
-      color: white;
-      font-size: 20px;
-      border-radius: 5px;
-
-      &:focus {
-        border-width: 0;
-        outline: none;
-        background: #4a90e2;
-      }
-
-      &:hover {
-        background: #63a6f1;
-      }
-    }
+@media screen and (max-width:  650px) {
+  .window {
+    height: 100vh;
+    width: 100%;
   }
 }
 </style>

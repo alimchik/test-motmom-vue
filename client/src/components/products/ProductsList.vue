@@ -1,30 +1,36 @@
 <template>
   <div>
     <section>
-      <div class="container">
+      <div class="container-fluid pr-3 pl-3 pr-sm-5 pl-sm-5">
         <div class='title'>
-            <h1>Товары</h1>
+          <h1>Товары</h1>
         </div>
 
         <div class='search-container'>
-            <div class='search'>
+            <div class='search m-right'>
               <span><i class="fa fa-search"></i></span>
               <input type='text' placeholder='Поиск' v-model="inputValue" @input="findProduct"/>
             </div>
-            <div class="btnContainer">
-              <button class="rmvActive"
+            <div class="btn-container">
+              <!-- <button class="rmvActive"
                       @click="removeProducts"
                       v-bind:class="{ rmvActive: isSomeItemSelected, rmvDisabled: !isSomeItemSelected }"
                       :disabled="!isSomeItemSelected"
+              >Удалить товары</button> -->
+
+              <button type="button" class="btn btn-danger m-right"
+                      @click="removeProducts"
+                      :disabled="!isSomeItemSelected"
               >Удалить товары</button>
-              <router-link :to='{name: "product-new"}' class='add'>Добавить товар</router-link>
+              <router-link :to='{name: "product-new"}' type="button" class='btn btn-success'>Добавить товар</router-link>
+              <!-- <router-link :to='{name: "product-new"}' class='add'>Добавить товар</router-link> -->
             </div>
           </div>
       </div>
     </section>
-    <section class="table-section ">
-      <div class="container">
-        <table class="products">
+    <section>
+      <div class="container-fluid pr-3 pl-3 pr-sm-5 pl-sm-5">
+        <table>
           <thead>
             <tr>
               <th>
@@ -115,29 +121,33 @@ export default {
 <style lang="scss">
 .title {
     padding-top: 40px;
-    margin-bottom: 10px;
 }
 
 .search-container {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  padding: 10px;
+  padding: 10px 0;
   background-color: #fff;
+
+  .m-right {
+    margin-right: 0.5rem;
+  }
 
   .search {
     display: flex;
     align-items: center;
+    min-width: 280px;
+    max-width: 450px;
+    width: 100%;
     border-radius: 5px;
     border: 2px solid #dad5d5;
 
     input {
       border: none;
-      height: 30px;
-      width: 300px;
-      border-radius: 5px;
-      font-size: 14px;
-
+      padding: 6px 12px;
+      width: 100%;
       &:focus {
         outline:none;
       }
@@ -148,64 +158,38 @@ export default {
     }
 
     span {
-      margin: 0 5px;
+      margin-left: 8px;
     }
+
+    // &:focus {
+    //   color: #495057;
+    //   background-color: #fff;
+    //   border-color: #80bdff;
+    //   outline: 0;
+    //   box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25)
+    // }
 
   }
-  .btnContainer {
-    display: flex;
-    button {
-      border-radius: 5px;
-      border: none;
-      color: #fff;
-      width: 180px;
-      height: 30px;
-      font-size: 16px;
-
-      &.add {
-        background: #24e307;
-        cursor: pointer;
-      }
-
-      &.rmvActive {
-        background: #e41313;
-        cursor: pointer;
-      }
-
-      &.rmvDisabled {
-        color: #8a8a8a;
-        background: #804e4e;
-      }
-
-      &:focus {
-        outline:none;
-      }
-
-      &:first-child {
-        margin-right: 10px;
-      }
+  @media screen and (max-width:  846px) {
+    .search {
+      max-width: 100%;
+      margin-bottom: 10px;
     }
-    a {
-      border-radius: 5px;
-      border: none;
-      color: #fff;
-      width: 180px;
-      height: 30px;
-      font-size: 16px;
-      display: inline-block;
-      text-decoration: none;
-      line-height: 31px;
-      text-align: center;
-      &.add {
-        background: #24e307;
-        cursor: pointer;
-      }
+
+    .m-right {
+      margin-right: 0;
+    }
+    .btn-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-grow: 1;
     }
   }
 }
 
 // Таблица
-.products {
+table {
   width: 100%;
   border: 0px;
   border-collapse: collapse;
@@ -225,11 +209,11 @@ export default {
       &:hover {
         background-color: #e5ecf0;
       }
-    }
 
-    td {
-      padding: 15px 10px;
-      border-bottom: 1px solid #e8e9eb;
+      td {
+        padding: 15px 10px;
+        border-bottom: 1px solid #e8e9eb;
+      }
     }
   }
 
@@ -246,6 +230,60 @@ export default {
   .rm-product:hover {
     color: rgb(153, 18, 18);
   }
+}
 
+@media screen and (max-width:  660px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+      thead {
+      tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+    }
+    tbody {
+      tr {
+        margin: 0 0 1rem 0;
+
+        &:nth-child(odd) {
+          background: #ccc;
+        }
+
+        td {
+          position: relative;
+          padding: 20px 15px 20px 50%;
+
+          &::before {
+            position: absolute;
+            left: 10px;
+            width: 45%;
+            padding-right: 10px;
+            font-weight: bold;
+          }
+          &:nth-of-type(2) {
+            &::before {
+              content: "Название";
+            }
+          }
+          &:nth-of-type(3) {
+            &::before {
+              content: "Количество(шт)";
+            }
+          }
+          &:nth-of-type(4) {
+            &::before {
+              content: "Цена(руб)";
+            }
+          }
+          &:nth-of-type(5) {
+            &::before {
+              content: "Дата добавления";
+            }
+          }
+        }
+      }
+    }
+  }
 }
 </style>

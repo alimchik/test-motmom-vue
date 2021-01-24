@@ -15,7 +15,7 @@ app.use('/api/auth', require('./routes/auth.route'));
 
 async function start() {
   try {
-    await mongoose.connect(MONGO_URI_LOCAL, {
+    await mongoose.connect(MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true
