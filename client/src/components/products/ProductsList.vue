@@ -12,11 +12,6 @@
               <input type='text' placeholder='Поиск' v-model="inputValue" @input="findProduct"/>
             </div>
             <div class="btn-container">
-              <!-- <button class="m-right"
-                      @click="removeProducts"
-                      :disabled="!isSomeItemSelected"
-                      :class="{active: isSomeItemSelected}"
-              >Удалить товары</button> -->
               <Button
                 :classes="[isSomeItemSelected ? 'active' : '', 'remove', 'm-right']"
                 :click="removeProducts"
@@ -175,47 +170,17 @@ export default {
       margin-left: 8px;
     }
 
-    // &:focus {
-    //   color: #495057;
-    //   background-color: #fff;
-    //   border-color: #80bdff;
-    //   outline: 0;
-    //   box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25)
-    // }
+    &:focus-within {
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25)
+    }
 
   }
   .btn-container {
     display: flex;
-    // button {
-    //   display: block;
-    //   font-weight: 400;
-    //   text-align: center;
-    //   color: #fff;
-    //   background-color: #dc3545;
-    //   border-color: #dc3545;
-    //   opacity: .65;
-    //   border: 1px solid transparent;
-    //   padding: .375rem .75rem;
-    //   font-size: 1rem;
-    //   line-height: 1.5;
-    //   border-radius: .25rem;
-    //   cursor: auto;
-    //   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    // }
-
-    // .active {
-    //   opacity: 1;
-    //   cursor: pointer;
-    //   &:hover {
-    //     background-color: #c82333;
-    //     border-color: #bd2130;
-    //   }
-    //   &:focus {
-    //     background-color: #c82333;
-    //     border-color: #bd2130;
-    //     box-shadow: 0 0 0 0.2rem rgba(225,83,97,.5);
-    //   }
-    // }
   }
   @media screen and (max-width:  846px) {
     .search {

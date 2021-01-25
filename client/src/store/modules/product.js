@@ -75,7 +75,6 @@ export default {
       } catch (e) {
         throw new Error(e.response.data.message)
       }
-      // return Promise.resolve(result.data)
       commit('insertProduct', result.data)
     },
 
