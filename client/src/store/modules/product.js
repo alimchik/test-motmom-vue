@@ -52,7 +52,7 @@ export default {
     },
 
     updateProduct (state, product) {
-      state.products = [...state.products.filter(item => item._id !== product.id), product]
+      state.products = [...state.products.filter(item => item._id !== product._id), product]
     }
   },
   actions: {

@@ -112,7 +112,7 @@ router.patch(
       count: product.count,
       price: product.price,
       date_add: product.date_add,
-      id: product._id
+      _id: product._id
     }
     res.status(200).json(result);
 });

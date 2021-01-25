@@ -5,36 +5,20 @@
         <h2 v-if="getUrl === 'login'" class="h3 mb-3 text-center">Войти</h2>
         <h2 v-else class="h3 mb-3 text-center">Регистрация</h2>
         <form class="bg-white p-3 border rounded" @submit.prevent="submitHandler">
-          <div class="form-row">
-            <div class="col">
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  class="form-control"
-                  placeholder="Введите ваш email"
-                  required
-                  v-model="email"
-                >
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col">
-              <div class="form-group">
-                <label for="password">Пароль</label>
-                <input
-                  type="password"
-                  id="password"
-                  class="form-control"
-                  placeholder="Введите ваш пароль"
-                  required
-                  v-model="password"
-                >
-              </div>
-            </div>
-          </div>
+          <FieldForm
+            type="email"
+            title="Email"
+            name="email"
+            placeholder="Введите ваш email"
+            v-bind:field.sync="email"
+          />
+          <FieldForm
+            type="password"
+            title="Пароль"
+            name="password"
+            placeholder="Введите ваш пароль"
+            v-bind:field.sync="password"
+          />
           <button v-if="getUrl === 'login'" @click.prevent="submitHandler" class="btn btn-outline-success btn-lg btn-block">Войти</button>
           <button v-else @submit.prevent="submitHandler" class="btn btn-outline-success btn-lg btn-block">Регистрация</button>
         </form>
@@ -44,6 +28,8 @@
 </template>
 
 <script>
+import FieldForm from './common/FieldForm'
+
 export default {
   computed: {
     getUrl: function () {
@@ -80,6 +66,10 @@ export default {
         })
         .catch(err => this.$toast.error(err.message))
     }
+  },
+
+  components: {
+    FieldForm
   }
 }
 </script>

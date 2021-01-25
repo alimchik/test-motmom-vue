@@ -16,14 +16,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-
-.container {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 10px 20px;
-  height: 100%;
-}
-
-</style>
