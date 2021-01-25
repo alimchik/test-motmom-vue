@@ -7,23 +7,17 @@
         </div>
 
         <div class='search-container'>
-            <div class='search m-right'>
+            <div class='search'>
               <span><i class="fa fa-search"></i></span>
               <input type='text' placeholder='Поиск' v-model="inputValue" @input="findProduct"/>
             </div>
             <div class="btn-container">
-              <!-- <button class="rmvActive"
-                      @click="removeProducts"
-                      v-bind:class="{ rmvActive: isSomeItemSelected, rmvDisabled: !isSomeItemSelected }"
-                      :disabled="!isSomeItemSelected"
-              >Удалить товары</button> -->
-
-              <button type="button" class="btn btn-danger m-right"
+              <button class="m-right"
                       @click="removeProducts"
                       :disabled="!isSomeItemSelected"
+                      :class="{active: isSomeItemSelected}"
               >Удалить товары</button>
-              <router-link :to='{name: "product-new"}' type="button" class='btn btn-success'>Добавить товар</router-link>
-              <!-- <router-link :to='{name: "product-new"}' class='add'>Добавить товар</router-link> -->
+              <router-link :to='{name: "product-new"}' type="button">Добавить товар</router-link>
             </div>
           </div>
       </div>
@@ -138,7 +132,7 @@ export default {
   .search {
     display: flex;
     align-items: center;
-    min-width: 280px;
+    min-width: 271px;
     max-width: 450px;
     width: 100%;
     border-radius: 5px;
@@ -170,20 +164,85 @@ export default {
     // }
 
   }
+  .btn-container {
+    display: flex;
+    button {
+      display: block;
+      font-weight: 400;
+      text-align: center;
+      color: #fff;
+      background-color: #dc3545;
+      border-color: #dc3545;
+      opacity: .65;
+      border: 1px solid transparent;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: .25rem;
+      cursor: auto;
+      transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .active {
+      opacity: 1;
+      cursor: pointer;
+      &:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+      }
+      &:focus {
+        background-color: #c82333;
+        border-color: #bd2130;
+        box-shadow: 0 0 0 0.2rem rgba(225,83,97,.5);
+      }
+    }
+
+    a {
+      text-decoration: none;
+      display: block;
+      font-weight: 400;
+      text-align: center;
+      color: #fff;
+      background-color: #28a745;
+      border-color: #28a745;
+      border: 1px solid transparent;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: .25rem;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+      &:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+      }
+      &:focus {
+        background-color: #218838;
+        border-color: #1e7e34;
+        box-shadow: 0 0 0 0.2rem rgba(72,180,97,.5);
+      }
+      &:active {
+        background-color: #1e7e34;
+        border-color: #1c7430;
+      }
+    }
+  }
   @media screen and (max-width:  846px) {
     .search {
       max-width: 100%;
       margin-bottom: 10px;
     }
 
-    .m-right {
-      margin-right: 0;
-    }
     .btn-container {
       width: 100%;
-      display: flex;
       justify-content: space-between;
-      flex-grow: 1;
+
+      button {
+        flex-grow: 1;
+      }
+      a {
+        flex-grow: 1;
+      }
     }
   }
 }

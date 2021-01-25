@@ -67,7 +67,7 @@ export default {
       if (this.getUrl === 'login') {
         this.$store.dispatch('login', { email, password })
           .then((data) => {
-            this.$router.push('/products')
+            this.$emit('go-to-page')
           })
           .catch(err => this.$toast.error(err.message))
         return
@@ -76,7 +76,7 @@ export default {
       this.$store.dispatch('registr', { email, password })
         .then((data) => {
           this.$toast.success(data)
-          this.$router.push('/login')
+          this.$emit('go-to-page')
         })
         .catch(err => this.$toast.error(err.message))
     }

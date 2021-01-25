@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import TheNavbar from './layout/TheNavbar'
+import TheNavbar from './components/layout/TheNavbar'
 import 'vue-toast-notification/dist/theme-sugar.css'
 
 export default {
