@@ -19,8 +19,8 @@
             placeholder="Введите ваш пароль"
             v-bind:field.sync="password"
           />
-          <button v-if="getUrl === 'login'" @click.prevent="submitHandler" class="btn btn-outline-success btn-lg btn-block">Войти</button>
-          <button v-else @submit.prevent="submitHandler" class="btn btn-outline-success btn-lg btn-block">Регистрация</button>
+          <Button v-if="getUrl === 'login'" :click="submitHandler" :classes="['btn', 'btn-outline-success', 'btn-lg', 'btn-block']" name="Войти"/>
+          <Button v-else :click="submitHandler" :classes="['btn', 'btn-outline-success', 'btn-lg', 'btn-block']" name="Регистрация"/>
         </form>
       </div>
     </div>
@@ -29,6 +29,7 @@
 
 <script>
 import FieldForm from './common/FieldForm'
+import Button from './common/Button'
 
 export default {
   computed: {
@@ -69,7 +70,8 @@ export default {
   },
 
   components: {
-    FieldForm
+    FieldForm,
+    Button
   }
 }
 </script>

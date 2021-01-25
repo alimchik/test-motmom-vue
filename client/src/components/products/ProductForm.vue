@@ -42,7 +42,7 @@
             :value="date_add"
             v-bind:field.sync="date_add"
           />
-          <button @submit="submitHandler" class="btn btn-outline-success btn-lg btn-block">{{ title }}</button>
+          <Button :click="submitHandler" :classes="['btn', 'btn-outline-success', 'btn-lg', 'btn-block']" :name="title"/>
         </form>
       </div>
     </div>
@@ -53,6 +53,7 @@
 import { mapGetters } from 'vuex'
 import FieldForm from '../common/FieldForm'
 import Link from '../common/Link'
+import Button from '../common/Button'
 
 export default {
   data () {
@@ -119,6 +120,7 @@ export default {
 
   components: {
     FieldForm,
+    Button,
     'my-link': Link
   }
 }
