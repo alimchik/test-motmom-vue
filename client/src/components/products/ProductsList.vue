@@ -17,7 +17,12 @@
                       :disabled="!isSomeItemSelected"
                       :class="{active: isSomeItemSelected}"
               >Удалить товары</button>
-              <router-link :to='{name: "product-new"}' type="button">Добавить товар</router-link>
+              <my-link
+                :classes="['add']"
+                component='product-new'
+              >
+                Добавить товар
+              </my-link>
             </div>
           </div>
       </div>
@@ -48,7 +53,9 @@
               <td>{{ product.price }}</td>
               <td>{{ product.date_add }}</td>
               <td>
-                <router-link :to="{name: 'product-edit', params:{ id: product._id }}"><i class="fas fa-edit edit-product"></i></router-link>
+                <my-link component='product-edit' :params="{ id: product._id }">
+                  <i class='fas fa-edit edit-product'></i>
+                </my-link>
               </td>
               <td>
                 <i class="far fa-trash-alt rm-product" @click.prevent="removeProductHandler($event, product._id)"></i>
@@ -64,6 +71,7 @@
 <script>
 import { debounce } from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
+import Link from '../common/Link'
 
 export default {
   data () {
@@ -108,6 +116,10 @@ export default {
 
   async mounted () {
     this.getProducts()
+  },
+
+  components: {
+    'my-link': Link
   }
 }
 </script>

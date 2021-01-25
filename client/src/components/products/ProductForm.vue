@@ -5,71 +5,12 @@
     <div class="window shadow">
       <div class="header p-4">
         <h2 class="h3">{{ title }}</h2>
-        <router-link to='/products'>
+        <my-link component='product-list'>
           <i class='fas fa-times'></i>
-        </router-link>
+        </my-link>
       </div>
       <div class="body">
         <form class="bg-white p-3 border rounded m-4" @submit.prevent="submitHandler">
-          <!-- <div class="form-row">
-            <div class="col">
-              <div class="form-group">
-                <label for="name-product">Название товара</label>
-                <input
-                  type="text"
-                  id="name-product"
-                  class="form-control"
-                  placeholder="Введите название товара"
-                  required
-                  v-model="name"
-                >
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col">
-              <div class="form-group">
-                <label for="count">Количество товара</label>
-                <input
-                  type="text"
-                  id="count"
-                  class="form-control"
-                  placeholder="шт."
-                  required
-                  v-model="count"
-                >
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col">
-              <div class="form-group">
-                <label for="price">Стоимость товара</label>
-                <input
-                  type="text"
-                  id="price"
-                  class="form-control"
-                  placeholder="руб."
-                  required
-                  v-model="price"
-                >
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col">
-              <div class="form-group">
-                <label for="date_add">Дата добавления</label>
-                <input
-                  type="date"
-                  id="date_add"
-                  class="form-control"
-                  required
-                  v-model="date_add"
-                >
-              </div>
-            </div>
-          </div> -->
           <FieldForm
             type="text"
             title="Название товара"
@@ -111,6 +52,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import FieldForm from '../common/FieldForm'
+import Link from '../common/Link'
 
 export default {
   data () {
@@ -176,7 +118,8 @@ export default {
   },
 
   components: {
-    FieldForm
+    FieldForm,
+    'my-link': Link
   }
 }
 </script>

@@ -11,6 +11,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    name: 'product-list',
     path: '/products',
     component: List,
     children: [
@@ -31,11 +32,13 @@ const routes = [
   },
 
   {
+    name: 'login',
     path: '/login',
     component: Login
   },
 
   {
+    name: 'registration',
     path: '/registration',
     component: Regiistration
   }

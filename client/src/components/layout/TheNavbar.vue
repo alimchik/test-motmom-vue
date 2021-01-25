@@ -7,8 +7,18 @@
             Выйти
           </button>
           <div class="d-flex justify-content-end" v-else>
-            <router-link type="button" class="btn btn-primary btn-lg mr-3" to="/login">Войти</router-link>
-            <router-link type="button" class="btn btn-primary btn-lg " to="/registration">Регистрация</router-link>
+            <my-link
+              :classes="['btn', 'btn-primary', 'btn-lg','mr-3']"
+              component='login'
+            >
+              Войти
+            </my-link>
+            <my-link
+              :classes="['btn', 'btn-primary', 'btn-lg']"
+              component='registration'
+            >
+              Регистрация
+            </my-link>
           </div>
         </div>
       </div>
@@ -17,6 +27,8 @@
 </template>
 
 <script>
+import Link from '../common/Link'
+
 export default {
   computed: {
     isLoggedIn () {
@@ -28,6 +40,9 @@ export default {
       this.$store.commit('logout')
       this.$router.push('/login')
     }
+  },
+  components: {
+    'my-link': Link
   }
 }
 </script>
