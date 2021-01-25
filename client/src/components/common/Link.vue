@@ -38,15 +38,21 @@ export default {
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 
   &:hover {
+    color: #fff;
+    text-decoration: none;
     background-color: #218838;
     border-color: #1e7e34;
   }
   &:focus {
+    color: #fff;
+    text-decoration: none;
     background-color: #218838;
     border-color: #1e7e34;
     box-shadow: 0 0 0 0.2rem rgba(72,180,97,.5);
   }
   &:active {
+    color: #fff;
+    text-decoration: none;
     background-color: #1e7e34;
     border-color: #1c7430;
   }
