@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="products-list">
     <section>
       <div class="container-fluid pr-3 pl-3 pr-sm-5 pl-sm-5">
         <div class='title'>
@@ -128,171 +128,173 @@ export default {
 </script>
 
 <style lang="scss">
-.title {
-    padding-top: 40px;
-}
-
-.search-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 10px 0;
-  background-color: #fff;
-
-  .m-right {
-    margin-right: 0.5rem;
+.products-list {
+  .title {
+      padding-top: 40px;
   }
 
-  .search {
+  .search-container {
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
-    min-width: 271px;
-    max-width: 450px;
-    width: 100%;
-    border-radius: 5px;
-    border: 2px solid #dad5d5;
+    padding: 10px 0;
+    background-color: #fff;
 
-    input {
-      border: none;
-      padding: 6px 12px;
-      width: 100%;
-      &:focus {
-        outline:none;
-      }
+    .m-right {
+      margin-right: 0.5rem;
     }
 
-    i {
-      color: #dad5d5;
-    }
-
-    span {
-      margin-left: 8px;
-    }
-
-    &:focus-within {
-      color: #495057;
-      background-color: #fff;
-      border-color: #80bdff;
-      outline: 0;
-      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25)
-    }
-
-  }
-  .btn-container {
-    display: flex;
-  }
-  @media screen and (max-width:  846px) {
     .search {
-      max-width: 100%;
-      margin-bottom: 10px;
-    }
-
-    .btn-container {
+      display: flex;
+      align-items: center;
+      min-width: 271px;
+      max-width: 450px;
       width: 100%;
-      justify-content: space-between;
+      border-radius: 5px;
+      border: 2px solid #dad5d5;
 
-      button {
-        flex-grow: 1;
+      input {
+        border: none;
+        padding: 6px 12px;
+        width: 100%;
+        &:focus {
+          outline:none;
+        }
       }
-      a {
-        flex-grow: 1;
+
+      i {
+        color: #dad5d5;
+      }
+
+      span {
+        margin-left: 8px;
+      }
+
+      &:focus-within {
+        color: #495057;
+        background-color: #fff;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25)
+      }
+
+    }
+    .btn-container {
+      display: flex;
+    }
+    @media screen and (max-width:  846px) {
+      .search {
+        max-width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .btn-container {
+        width: 100%;
+        justify-content: space-between;
+
+        button {
+          flex-grow: 1;
+        }
+        a {
+          flex-grow: 1;
+        }
       }
     }
   }
-}
 
-// Таблица
-table {
-  width: 100%;
-  border: 0px;
-  border-collapse: collapse;
-  text-align: left;
-  background: #fff;
+  // Таблица
+  table {
+    width: 100%;
+    border: 0px;
+    border-collapse: collapse;
+    text-align: left;
+    background: #fff;
 
-  thead {
-    background-color: #f0f0f0;
+    thead {
+      background-color: #f0f0f0;
 
-    th {
-      padding: 5px 10px;
-    }
-  }
-
-  tbody {
-    tr {
-      &:hover {
-        background-color: #e5ecf0;
-      }
-
-      td {
-        padding: 15px 10px;
-        border-bottom: 1px solid #e8e9eb;
+      th {
+        padding: 5px 10px;
       }
     }
-  }
 
-  .edit-product {
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-  }
-
-  .rm-product {
-    cursor: pointer;
-  }
-
-  .rm-product:hover {
-    color: rgb(153, 18, 18);
-  }
-}
-
-@media screen and (max-width:  660px) {
-  table, thead, tbody, th, td, tr {
-    display: block;
-      thead {
-      tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-      }
-    }
     tbody {
       tr {
-        margin: 0 0 1rem 0;
-
-        &:nth-child(odd) {
-          background: #ccc;
+        &:hover {
+          background-color: #e5ecf0;
         }
 
         td {
-          position: relative;
-          padding: 20px 15px 20px 50%;
+          padding: 15px 10px;
+          border-bottom: 1px solid #e8e9eb;
+        }
+      }
+    }
 
-          &::before {
-            position: absolute;
-            left: 10px;
-            width: 45%;
-            padding-right: 10px;
-            font-weight: bold;
+    .edit-product {
+      text-decoration: none;
+      color: black;
+      cursor: pointer;
+    }
+
+    .rm-product {
+      cursor: pointer;
+    }
+
+    .rm-product:hover {
+      color: rgb(153, 18, 18);
+    }
+  }
+
+  @media screen and (max-width:  660px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+        thead {
+        tr {
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+        }
+      }
+      tbody {
+        tr {
+          margin: 0 0 1rem 0;
+
+          &:nth-child(odd) {
+            background: #ccc;
           }
-          &:nth-of-type(2) {
+
+          td {
+            position: relative;
+            padding: 20px 15px 20px 50%;
+
             &::before {
-              content: "Название";
+              position: absolute;
+              left: 10px;
+              width: 45%;
+              padding-right: 10px;
+              font-weight: bold;
             }
-          }
-          &:nth-of-type(3) {
-            &::before {
-              content: "Количество(шт)";
+            &:nth-of-type(2) {
+              &::before {
+                content: "Название";
+              }
             }
-          }
-          &:nth-of-type(4) {
-            &::before {
-              content: "Цена(руб)";
+            &:nth-of-type(3) {
+              &::before {
+                content: "Количество(шт)";
+              }
             }
-          }
-          &:nth-of-type(5) {
-            &::before {
-              content: "Дата добавления";
+            &:nth-of-type(4) {
+              &::before {
+                content: "Цена(руб)";
+              }
+            }
+            &:nth-of-type(5) {
+              &::before {
+                content: "Дата добавления";
+              }
             }
           }
         }

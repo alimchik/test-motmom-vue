@@ -13,10 +13,10 @@ export default {
   },
 
   mutations: {
-    auth_request (state) {
+    authRequest (state) {
       state.status = 'loading'
     },
-    auth_success (state, token, user) {
+    authSuccess (state, token, user) {
       state.status = 'success'
       state.token = token
       state.user = user
@@ -40,14 +40,14 @@ export default {
       }
     },
     async login ({ commit }, user) {
-      commit('auth_request')
+      commit('authRequest')
       try {
         const result = await myAxios.post('auth/login', user)
         if (result.status === 200) {
           const token = result.data.token
           const user = result.data.user
           localStorage.setItem('token', result.data.token)
-          commit('auth_success', token, user)
+          commit('authSuccess', token, user)
         }
       } catch (e) {
         throw new Error(e.response.data.message)

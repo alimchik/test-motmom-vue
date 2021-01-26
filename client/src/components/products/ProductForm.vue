@@ -1,59 +1,47 @@
 <template>
-  <portal to="modal-window">
-    <div class="modal-background" @click="closeModal">
-    </div>
-    <div class="window shadow">
-      <div class="header p-4">
-        <h2 class="h3">{{ title }}</h2>
-        <my-link component='product-list'>
-          <i class='fas fa-times'></i>
-        </my-link>
-      </div>
-      <div class="body">
-        <form class="bg-white p-3 border rounded m-4" @submit.prevent="submitHandler">
-          <FieldForm
-            type="text"
-            title="Название товара"
-            name="name-product"
-            placeholder="Введите название товара"
-            :value="name"
-            v-bind:field.sync="name"
-          />
-          <FieldForm
-            type="text"
-            title="Количество товара"
-            name="count"
-            placeholder="шт."
-            :value="count"
-            v-bind:field.sync="count"
-          />
-          <FieldForm
-            type="text"
-            title="Стоимость товара"
-            name="price"
-            placeholder="руб."
-            :value="price"
-            v-bind:field.sync="price"
-          />
-          <FieldForm
-            type="date"
-            title="Дата добавления"
-            name="date_add"
-            :value="date_add"
-            v-bind:field.sync="date_add"
-          />
-          <Button :click="submitHandler" :classes="['btn', 'btn-outline-success', 'btn-lg', 'btn-block']" :name="title"/>
-        </form>
-      </div>
-    </div>
-  </portal>
+  <modal-window :click="closeModal" :title="title">
+    <form class="bg-white p-3 border rounded m-4" @submit.prevent="submitHandler">
+      <FieldForm
+        type="text"
+        title="Название товара"
+        name="name-product"
+        placeholder="Введите название товара"
+        :value="name"
+        v-bind:field.sync="name"
+      />
+      <FieldForm
+        type="text"
+        title="Количество товара"
+        name="count"
+        placeholder="шт."
+        :value="count"
+        v-bind:field.sync="count"
+      />
+      <FieldForm
+        type="text"
+        title="Стоимость товара"
+        name="price"
+        placeholder="руб."
+        :value="price"
+        v-bind:field.sync="price"
+      />
+      <FieldForm
+        type="date"
+        title="Дата добавления"
+        name="date_add"
+        :value="date_add"
+        v-bind:field.sync="date_add"
+      />
+      <Button :click="submitHandler" :classes="['btn', 'btn-outline-success', 'btn-lg', 'btn-block']" :name="title"/>
+    </form>
+  </modal-window>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import FieldForm from '../common/FieldForm'
-import Link from '../common/Link'
 import Button from '../common/Button'
+import ModalWindow from '../common/ModalWindow'
 
 export default {
   data () {
@@ -71,7 +59,7 @@ export default {
 
   methods: {
     closeModal: function () {
-      this.$router.go(-1)
+      this.$emit('go-to-page')
     },
 
     submitHandler () {
@@ -121,58 +109,7 @@ export default {
   components: {
     FieldForm,
     Button,
-    'my-link': Link
+    'modal-window': ModalWindow
   }
 }
 </script>
-
-<style lang="scss">
-.modal-background {
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0,0,0,.3);
-  z-index: 10;
-}
-
-.window {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  min-height: 200px;
-  width: 100%;
-  min-width: 320px;
-  max-width: 650px;
-  box-sizing: border-box;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  z-index: 20;
-
-  .header {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-    align-items: center;
-
-    i {
-      color: rgb(0, 0, 0);
-
-      &:hover {
-        color: rgb(136, 6, 6);
-      }
-    }
-  }
-}
-
-@media screen and (max-width:  650px) {
-  .window {
-    height: 100vh;
-    width: 100%;
-  }
-}
-</style>
