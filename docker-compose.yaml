@@ -4,6 +4,7 @@ services:
   client:
     build: client/
     restart: always
+    command: npm run serve
     ports:
       - 8080:8080
 
@@ -16,6 +17,7 @@ services:
   server:
     build: server/
     restart: always
+    command: npm run server
     ports:
       - 5000:5000
     depends_on:
